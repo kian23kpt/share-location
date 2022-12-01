@@ -1,0 +1,54 @@
+:host {
+  form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 30vw;
+    margin: auto;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    padding: 30px;
+    box-sizing: border-box;
+
+    .map {
+      height: 200px;
+      padding: 0;
+      margin: 20px 0;
+      border-radius: 5px;
+    }
+
+    .logo__section {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: 1px solid lightgray;
+      border-radius: 5px;
+      padding: 15px;
+
+      span {
+        color: gray;
+      }
+      .logo {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+    }
+  }
+
+  .location__section {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 20px;
+    border-top: 1px solid lightgray;
+    margin: 30px;
+    padding: 20px;
+
+    h3 {
+      font-size: 24px;
+      font-weight: 500;
+      color: gray;
+    }
+  }
+}

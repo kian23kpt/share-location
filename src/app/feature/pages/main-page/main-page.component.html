@@ -1,0 +1,47 @@
+<app-navbar></app-navbar>
+
+<form [formGroup]="form" (submit)="handleAddLocation()">
+  <mat-form-field appearance="outline">
+    <mat-label>Location Name</mat-label>
+    <input type="text" matInput autocomplete="off" formControlName="name" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Location Type</mat-label>
+    <mat-select formControlName="type">
+      <mat-option *ngFor="let location of types()" [value]="location">
+        {{ locationTypes[location] }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <section class="logo__section">
+    <span *ngIf="!selectedFile">Logo</span>
+    <input
+      #imageInput
+      type="file"
+      accept="image/*"
+      (change)="processFile(imageInput)"
+    />
+    <img *ngIf="selectedFile" class="logo" [src]="selectedFile" alt="Logo" />
+  </section>
+
+  <div
+    class="map"
+    leaflet
+    [leafletOptions]="options"
+    (leafletClick)="mapClicked($event)"
+  ></div>
+
+  <button mat-flat-button color="primary" [disabled]="form.pristine">
+    Add Location
+  </button>
+</form>
+
+<section class="location__section">
+  <h3>Locations:</h3>
+  <app-location-card
+    *ngFor="let location of locations$ | async"
+    [data]="location"
+  ></app-location-card>
+</section>

@@ -1,0 +1,21 @@
+@import "~@angular/material/theming";
+
+@include mat-core();
+$primary: mat-palette($mat-blue, 800);
+
+:host {
+  display: flex;
+  align-items: center;
+  height: 50px;
+  background: mat-color($primary, default);
+  color: white;
+  padding: 0 40px;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+
+  h2 {
+    font-size: 24px;
+    font-weight: 500;
+    margin: 0;
+  }
+}
