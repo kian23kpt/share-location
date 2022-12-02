@@ -16,7 +16,9 @@ export class LocationCardComponent implements OnChanges {
   constructor() {}
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.marker = new Marker(latLng(this.data.latLng));
+    this.marker = new Marker(latLng(this.data.latLng)).bindPopup(
+      this.data.name
+    );
 
     this.options = {
       layers: [
