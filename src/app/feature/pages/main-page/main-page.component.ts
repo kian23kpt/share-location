@@ -73,5 +73,6 @@ export class MainPageComponent implements OnInit {
   handleAddLocation() {
     this._store.dispatch(new LocationActions.AddLocation(this.form.value));
     this.form.reset();
+    this.selectedFile = '';
   }
 }
