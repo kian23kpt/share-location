@@ -41,7 +41,7 @@
 <section class="location__section">
   <h3>Locations:</h3>
   <app-location-card
-    *ngFor="let location of locations$ | async"
+    *ngFor="let location of (locations$ | async) || locations"
     [data]="location"
   ></app-location-card>
 </section>

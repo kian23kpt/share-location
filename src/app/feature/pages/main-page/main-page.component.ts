@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { NgxsStoragePlugin } from '@ngxs/storage-plugin';
 import { Select, Store } from '@ngxs/store';
 import { tileLayer, latLng, marker, LeafletMouseEvent } from 'leaflet';
 import { Observable } from 'rxjs';
@@ -12,20 +13,14 @@ import { LocationState } from 'src/app/core/states';
   templateUrl: './main-page.component.html',
   styleUrls: ['./main-page.component.scss'],
 })
-export class MainPageComponent {
+export class MainPageComponent implements OnInit {
   @Select(LocationState.locations) locations$!: Observable<Location.Model[]>;
 
   locationTypes = Location.Type;
   defaultLatLng = { lat: 35.7219, lng: 51.3347 };
   marker = marker(latLng(this.defaultLatLng));
   selectedFile!: string;
-
-  form = this._fb.group({
-    name: [''],
-    type: [''],
-    latLng: [{}],
-    logo: [''],
-  });
+  locations!: Location.Model[];
 
   options = {
     layers: [
@@ -38,7 +33,21 @@ export class MainPageComponent {
     center: latLng(this.defaultLatLng),
   };
 
+  form = this._fb.group({
+    name: [''],
+    type: [''],
+    latLng: [{}],
+    logo: [''],
+  });
+
   constructor(private _fb: FormBuilder, private _store: Store) {}
+
+  ngOnInit() {
+    const storage = localStorage.getItem('location');
+    if (storage) {
+      this.locations = JSON.parse(storage).locations;
+    }
+  }
 
   types(): Array<any> {
     var keys = Object.keys(this.locationTypes);
@@ -63,5 +72,6 @@ export class MainPageComponent {
 
   handleAddLocation() {
     this._store.dispatch(new LocationActions.AddLocation(this.form.value));
+    this.form.reset();
   }
 }

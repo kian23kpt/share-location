@@ -1,5 +1,9 @@
 :host {
-  .map {
+  mat-card {
+    border: 1px solid lightgray;
+    box-shadow: none;
+  }
+  .card-map {
     height: 200px;
   }
 }
