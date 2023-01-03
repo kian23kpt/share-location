@@ -50,7 +50,7 @@ export class MainPageComponent implements OnInit {
   }
 
   types(): Array<any> {
-    var keys = Object.keys(this.locationTypes);
+    const keys = Object.keys(this.locationTypes);
     return keys.filter((k) => !isNaN(Number(k)));
   }
 
